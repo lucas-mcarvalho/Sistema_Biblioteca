@@ -1,5 +1,8 @@
 package Biblioteca;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,11 +18,20 @@ public class Biblioteca {
 		ArrayList<Livro> livros = new ArrayList<>();
 		ArrayList<Livro> emprestimo = new ArrayList<Livro>();
 		
-		Autor a1 = new Autor(123123,"Pedro","15/09/2000");
-		Livro l1= new Livro(2131231,a1,"HarryPotter","20/12/2003","10/2025/2025"); 
+		//DATETIMEFORMAT
+		DateTimeFormatter df =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		//LOCALDATE PRA INSERIR A DATA NO AUTOR
+		LocalDate date =  LocalDate.parse("20/08/2004",df);
+		
+		Autor a1 = new Autor(123123,"Pedro",date);
+		Autor a2 = new Autor(123124,"Jose",date);
+		Livro l1= new Livro(2131231,a1,"HarryPotter"); 
+		Livro l2= new Livro(2131235,a2,"Mente milionaria"); 
 		
 		
 		livros.add(l1);
+		livros.add(l2);
 		
 		System.out.println();
 		int op = 0;	
@@ -60,7 +72,7 @@ public class Biblioteca {
 				for(Livro livro: livros) {
 					System.out.println("Livros disponiveis: ");
 					if(livro.getDisponivel()== true) {
-					System.out.print(l1);
+					System.out.print(livro);
 					}
 					for(Livro livro_emprestado: emprestimo) {
 						System.out.println("Livros emprestados: ");

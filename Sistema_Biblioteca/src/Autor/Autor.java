@@ -1,17 +1,25 @@
 package Autor;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 public class Autor {
 	
 	private Integer id;
 	private String nome;
-	private String dataNascimento;
+	private LocalDate dataNascimento;
+	
+	DateTimeFormatter df =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	
-	public Autor(int id, String nome, String dataNascimento) {
+	public Autor(int id, String nome, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 	}
+	
+	
 
 
 	public Integer getId() {
@@ -34,19 +42,20 @@ public class Autor {
 	}
 
 
-	public String getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Autor id=" + id + ",nome:" + nome + ",dataNascimento=" +dataNascimento + ".";
+		return "Nome: " + nome + ", id:" + id + ", dataNascimento: " +dataNascimento.format(df) + ".";
+		
 	}
 	
 	

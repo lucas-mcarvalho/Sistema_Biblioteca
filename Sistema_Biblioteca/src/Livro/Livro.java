@@ -1,5 +1,8 @@
 package Livro;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import Autor.Autor;
 
 public class Livro {
@@ -8,18 +11,28 @@ public class Livro {
 	private String titulo;
 	private Autor autor;
 	private Boolean disponivel = true;
-	private String dataAtualizacao;
-	private String dataCadastro;
+	private LocalDateTime dataAtualizacao;
+	private LocalDateTime dataCadastro;
+	
+	private static DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
 	
-	public Livro(Integer id, Autor autor,String titulo, String dataAtualizacao,String dataCadastro) {
+	public Livro(Integer id, Autor autor,String titulo, LocalDateTime dataAtualizacao,LocalDateTime dataCadastro) {
 		this.id = id;
 		this.titulo = titulo;
 		this.autor = autor;
-		this.dataAtualizacao = dataAtualizacao;
-		this.dataCadastro = dataCadastro;
+		this.dataAtualizacao = dataAtualizacao.now();
+		this.dataCadastro = dataCadastro.now();
 	}
 
+	
+	public Livro(Integer id, Autor autor,String titulo) {
+		this.id = id;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.dataAtualizacao = dataAtualizacao.now();
+		this.dataCadastro = dataCadastro.now();
+	}
 
 	
 	
@@ -63,22 +76,22 @@ public class Livro {
 	}
 
 
-	public String getDataAtualizacao() {
+	public LocalDateTime getDataAtualizacao() {
 		return dataAtualizacao;
 	}
 
 
-	public void setDataAtualizacao(String dataAtualizacao) {
+	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
 
-	public String getDataCadastro() {
+	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}
 
 
-	public void setDataCadastro(String dataCadastro) {
+	public void setDataCadastro(LocalDateTime dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -89,8 +102,14 @@ public class Livro {
 
 	@Override
 	public String toString() {
-		return "Livro : id: " + id + ",titulo: "+titulo+ ",autor:" + autor + ", disponivel:" + disponivel
-				+ ", dataAtualizacao: " + dataAtualizacao + ", dataCadastro:" + dataCadastro + "";
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Livro :").append("\n");
+		sb.append("id: ").append(id).append(" ,Titulo: ").append(titulo).append("\n");
+		sb.append("Autor: ").append(autor).append("\n");
+		sb.append("Disponivel: ").append(disponivel).append("  ,Data da ultima atualizacao: ").append(dataAtualizacao.format(df))
+		.append(", data do Cadastro").append(dataCadastro.format(df));
+		return sb.toString();
 	}
 	
 	
