@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import Autor.Autor;
+import Cliente.Cliente;
 
 public class Livro {
 	
@@ -13,6 +14,7 @@ public class Livro {
 	private Boolean disponivel = true;
 	private LocalDateTime dataAtualizacao;
 	private LocalDateTime dataCadastro;
+	private Cliente cliente;
 	
 	private static DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
@@ -95,6 +97,29 @@ public class Livro {
 		this.dataCadastro = dataCadastro;
 	}
 
+	
+	
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public static DateTimeFormatter getDf() {
+		return df;
+	}
+
+
+	public static void setDf(DateTimeFormatter df) {
+		Livro.df = df;
+	}
+
+
 	public void emprestar() {
 		this.disponivel = false;
 	}
@@ -108,7 +133,10 @@ public class Livro {
 		sb.append("id: ").append(id).append(" ,Titulo: ").append(titulo).append("\n");
 		sb.append("Autor: ").append(autor).append("\n");
 		sb.append("Disponivel: ").append(disponivel).append("  ,Data da ultima atualizacao: ").append(dataAtualizacao.format(df))
-		.append(", data do Cadastro").append(dataCadastro.format(df));
+		.append(", data do Cadastro : ").append(dataCadastro.format(df));
+		if(getCliente()!=null) {
+		sb.append("Livro emprestado para o cliente : ").append(getCliente());
+		}
 		return sb.toString();
 	}
 	
