@@ -29,6 +29,7 @@ public class Biblioteca {
 		Autor a2 = new Autor(123124,"Jose",date);
 		Livro l1= new Livro(2131231,a1,"HarryPotter"); 
 		Livro l2= new Livro(2131235,a2,"Mente milionaria"); 
+		Boolean cadastrado = false;
 		
 		
 		livros.add(l1);
@@ -52,28 +53,41 @@ public class Biblioteca {
 				System.out.println("Digite o numero de cadastro :");
 				int cadastro = sc.nextInt();
 				
+				
 				for (Cliente c : clientes) {
 		            if (c.getCadastro() == cadastro) {
-		                cliente = c;
+		            	cadastrado = true;
 		                break;
 		            }
 		        }
-				
-				
-				}else {
+				if(cadastrado == false) {
+					System.out.println("Cliente nao encontrado !");
+					cadastrado = false;
+				}	
+				}else  {
 					System.out.println("Digite seu nome :");
 					String nome = sc.nextLine();
 					System.out.println("Digite email : ");
 					String email = sc.nextLine();
 					System.out.println("Digite o numero do cadastro :");
-					int cadastro = sc.nextInt();
-					 cliente  = new Cliente(nome,email,cadastro);
+					int cadastro1 = sc.nextInt();
+					sc.nextLine();
+					System.out.println("Digite sua data de nascimento : Formato(dd/MM/yyyy)");
+					String dateBirht = sc.nextLine();
+					LocalDate date_birth = LocalDate.parse(dateBirht,df);
+					cadastrado = true;
+					
+					clientes.add(new Cliente(nome,email,cadastro1,date_birth));
 				}
 				
+				
+				if(cadastrado == true) {
+				System.out.println("Livros disponiveis: ");
+				
 				for(Livro livro: livros) {
-					System.out.println("Livros disponiveis: ");
 					if(livro.getDisponivel()== true) {
-					System.out.print(l1);
+					System.out.print(livro);
+					System.out.println();
 					}
 				}
 				System.out.println();
@@ -87,13 +101,14 @@ public class Biblioteca {
 					livro2.emprestar();
 					livro2.setCliente(cliente);
 					emprestimo.add(livro2);
-					clientes.add(cliente);
 					
+					}
+				}
 					}
 				}
 				System.out.println();
 				break;
-			}
+			
 			
 			
 			case 3:
